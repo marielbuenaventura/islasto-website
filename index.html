@@ -1,476 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Islas Hospitality Group - Events & Experiences</title>
-    <style>
-        :root {
-            --ink: #1a1410;
-            --forest: #2d1f18;
-            --forest-mid: #4a3425;
-            --gold: #d4a574;
-            --gold-light: #e8b88a;
-            --cream: #f5f1ea;
-            --mist: #a89878;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Islas Hospitality Group — Chef-Led Experiences &amp; Events</title>
+  <meta name="description" content="Chef-led storytelling dinners, cultural demos, and operator workshops. Led by Chef Marc and Mariel Buenaventura. Available for private, corporate, and community events across Canada.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1410;
+      --forest: #2d1f18;
+      --forest-mid: #4a3425;
+      --gold: #d4a574;
+      --gold-light: #e8b88a;
+      --gold-dim: rgba(212,165,116,0.15);
+      --cream: #f5f1ea;
+      --mist: #a89878;
+      --mist-dim: rgba(168,152,120,0.4);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--ink); color: var(--cream); overflow-x: hidden; }
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 22px 52px; transition: all 0.4s; }
+    nav.scrolled { background: rgba(26,20,16,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--gold-dim); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; letter-spacing: 0.1em; color: var(--cream); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-link { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mist); text-decoration: none; transition: color 0.2s; }
+    .nav-link:hover { color: var(--gold); }
+    .nav-cta { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 10px 20px; border-radius: 2px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--gold-light); }
 
-        body {
-            font-family: 'DM Sans', 'Segoe UI', sans-serif;
-            background: var(--ink);
-            color: var(--cream);
-            line-height: 1.6;
-        }
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 160px 52px 100px; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 120% 80% at 60% 40%, rgba(74,52,37,0.6) 0%, var(--ink) 65%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(212,165,116,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,165,116,0.04) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3) 40%, transparent); }
+    .hero-content { position: relative; z-index: 2; max-width: 960px; }
+    .status-pill { display: inline-flex; align-items: center; gap: 10px; padding: 9px 18px; border: 1px solid var(--gold-dim); border-radius: 100px; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+    .status-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 6vw, 82px); font-weight: 300; line-height: 1.06; color: var(--cream); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.9s 0.4s forwards; }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-sub { font-size: 19px; font-weight: 300; color: var(--mist); max-width: 680px; line-height: 1.7; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.9s 0.6s forwards; }
+    .hero-sub strong { color: var(--cream); font-weight: 400; }
+    .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s 0.8s forwards; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--ink); font-size: 14px; font-weight: 500; padding: 16px 32px; border-radius: 2px; text-decoration: none; transition: all 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 12px 40px rgba(212,165,116,0.3); }
+    .btn-primary svg { transition: transform 0.2s; }
+    .btn-primary:hover svg { transform: translateX(4px); }
+    .btn-text { display: inline-flex; align-items: center; gap: 8px; color: var(--cream); font-size: 14px; font-weight: 400; text-decoration: none; border-bottom: 1px solid var(--gold-dim); padding-bottom: 4px; transition: all 0.2s; }
+    .btn-text:hover { color: var(--gold); border-bottom-color: var(--gold); }
 
-        /* Header & Navigation */
-        header {
-            background: linear-gradient(135deg, rgba(45, 31, 24, 0.95), rgba(74, 52, 37, 0.9));
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--gold);
-        }
+    /* SHARED */
+    .section-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 24px; }
+    h2 em { font-style: italic; color: var(--gold-light); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .logo {
-            font-family: 'Cormorant', serif;
-            font-size: 1.8rem;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            color: var(--cream);
-        }
+    /* SEASON NOTE */
+    .season-section { background: var(--forest); border-top: 1px solid var(--gold-dim); border-bottom: 1px solid var(--gold-dim); padding: 56px 52px; }
+    .season-inner { max-width: 880px; margin: 0 auto; display: flex; gap: 32px; align-items: flex-start; }
+    .season-mark { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; font-style: italic; color: var(--gold); white-space: nowrap; padding-top: 3px; letter-spacing: 0.06em; }
+    .season-text { font-size: 16px; font-weight: 300; color: var(--mist); line-height: 1.8; }
+    .season-text strong { color: var(--cream); font-weight: 400; }
 
-        nav a {
-            color: var(--mist);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-            border-bottom: 2px solid transparent;
-            padding-bottom: 0.25rem;
-        }
+    /* EXPERIENCES */
+    .experiences-section { padding: 120px 52px; max-width: 1200px; margin: 0 auto; }
+    .experiences-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 48px; }
+    .exp-card { background: rgba(255,255,255,0.02); padding: 40px 32px; border-top: 2px solid transparent; transition: all 0.3s; }
+    .exp-card:hover { border-top-color: var(--gold); background: rgba(212,165,116,0.05); }
+    .exp-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .exp-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--cream); margin-bottom: 12px; line-height: 1.25; }
+    .exp-card p { font-size: 14px; font-weight: 300; color: var(--mist); line-height: 1.75; margin-bottom: 20px; }
+    .exp-card p strong { color: var(--cream); font-weight: 400; }
+    .exp-suitable { font-size: 12px; color: var(--mist-dim); border-top: 1px solid var(--gold-dim); padding-top: 16px; line-height: 1.6; }
+    .exp-suitable span { color: var(--mist); }
 
-        nav a:hover {
-            color: var(--gold);
-            border-bottom-color: var(--gold);
-        }
+    /* HALAL EXPO MOMENT */
+    .moment-section { background: var(--forest); padding: 100px 52px; border-top: 1px solid var(--gold-dim); }
+    .moment-inner { max-width: 880px; margin: 0 auto; }
+    .moment-inner p { font-size: 18px; font-weight: 300; line-height: 1.82; color: var(--mist); margin-bottom: 20px; }
+    .moment-inner strong { color: var(--cream); font-weight: 400; }
+    .pull-quote { border-left: 2px solid var(--gold); padding: 22px 28px; margin: 32px 0; background: rgba(212,165,116,0.05); }
+    .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.5; margin: 0; }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(45, 31, 24, 0.8), rgba(74, 52, 37, 0.7)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%231a1410" width="1200" height="400"/></svg>');
-            background-size: cover;
-            background-position: center;
-            padding: 6rem 2rem;
-            text-align: center;
-            color: var(--cream);
-        }
+    /* ABOUT */
+    .about-section { padding: 120px 52px; border-top: 1px solid var(--gold-dim); }
+    .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-text p { font-size: 17px; font-weight: 300; line-height: 1.82; color: var(--mist); margin-bottom: 20px; }
+    .about-text strong { color: var(--cream); font-weight: 400; }
+    .team-stack { display: flex; flex-direction: column; gap: 2px; }
+    .team-member { display: grid; grid-template-columns: 72px 1fr; gap: 20px; padding: 24px; background: rgba(255,255,255,0.02); align-items: start; transition: background 0.2s; text-decoration: none; }
+    .team-member:hover { background: rgba(212,165,116,0.05); }
+    .team-avatar { width: 72px; height: 72px; border-radius: 50%; overflow: hidden; border: 1px solid var(--gold-dim); background: var(--forest); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .team-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .team-initials { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: rgba(212,165,116,0.4); }
+    .team-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--cream); margin-bottom: 2px; }
+    .team-role { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .team-bio { font-size: 13px; font-weight: 300; color: var(--mist); line-height: 1.6; }
 
-        .hero h1 {
-            font-family: 'Cormorant', serif;
-            font-size: 3.5rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
-        }
+    /* INQUIRY FORM */
+    .inquiry-section { background: var(--forest); padding: 120px 52px; border-top: 1px solid var(--gold-dim); }
+    .inquiry-inner { max-width: 800px; margin: 0 auto; }
+    .inquiry-intro { margin-bottom: 52px; }
+    .inquiry-intro p { font-size: 18px; font-weight: 300; color: var(--mist); line-height: 1.7; margin-top: 16px; }
+    .inquiry-intro strong { color: var(--cream); font-weight: 400; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-field { display: flex; flex-direction: column; gap: 8px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mist); }
+    .form-field input, .form-field select, .form-field textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--gold-dim); color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 300; padding: 14px 18px; border-radius: 2px; outline: none; transition: border-color 0.2s; width: 100%; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: rgba(212,165,116,0.5); }
+    .form-field select option { background: var(--forest); color: var(--cream); }
+    .form-field textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+    .form-note { font-size: 12px; color: var(--mist); margin-top: 8px; }
+    .form-submit { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--ink); font-size: 14px; font-weight: 500; padding: 16px 36px; border-radius: 2px; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; margin-top: 8px; }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .form-submit svg { transition: transform 0.2s; }
+    .form-submit:hover svg { transform: translateX(4px); }
+    #form-success { display: none; padding: 24px 28px; background: rgba(212,165,116,0.08); border: 1px solid var(--gold-dim); margin-top: 24px; }
+    #form-success p { font-size: 15px; font-weight: 300; color: var(--cream); line-height: 1.6; }
+    #form-success strong { color: var(--gold); font-weight: 400; }
 
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: var(--mist);
-            font-style: italic;
-        }
+    /* ECOSYSTEM */
+    .ecosystem-section { padding: 64px 52px; text-align: center; border-top: 1px solid var(--gold-dim); }
+    .ecosystem-inner { max-width: 800px; margin: 0 auto; }
+    .ecosystem-label { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mist); margin-bottom: 24px; }
+    .ecosystem-links { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
+    .ecosystem-link { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--mist); text-decoration: none; transition: color 0.2s; }
+    .ecosystem-link:hover { color: var(--gold); }
 
-        .cta-button {
-            background: var(--gold);
-            color: var(--ink);
-            padding: 0.9rem 2.5rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+    /* FOOTER */
+    footer { border-top: 1px solid var(--gold-dim); padding: 48px 52px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--cream); letter-spacing: 0.08em; }
+    .footer-logo span { color: var(--gold); }
+    .footer-meta { display: flex; gap: 24px; align-items: center; }
+    .footer-meta a { font-size: 12px; color: var(--mist); text-decoration: none; transition: color 0.2s; }
+    .footer-meta a:hover { color: var(--gold); }
+    footer p { font-size: 12px; color: var(--mist); }
 
-        .cta-button:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(212, 165, 116, 0.3);
-        }
-
-        /* Section Styling */
-        section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        section h2 {
-            font-family: 'Cormorant', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: var(--gold);
-            letter-spacing: 0.05em;
-        }
-
-        /* Events Calendar */
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .event-card {
-            background: linear-gradient(135deg, var(--forest-mid), var(--forest));
-            padding: 2rem;
-            border-left: 4px solid var(--gold);
-            transition: all 0.3s ease;
-        }
-
-        .event-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(212, 165, 116, 0.2);
-        }
-
-        .event-date {
-            color: var(--gold);
-            font-family: 'Cormorant', serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .event-title {
-            font-family: 'Cormorant', serif;
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            color: var(--cream);
-        }
-
-        .event-location {
-            color: var(--mist);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .event-description {
-            color: var(--cream);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .event-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--forest-mid);
-            padding-top: 1.5rem;
-        }
-
-        .event-price {
-            font-family: 'Cormorant', serif;
-            font-size: 1.4rem;
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        .book-button {
-            background: var(--gold);
-            color: var(--ink);
-            padding: 0.6rem 1.5rem;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            transition: all 0.3s ease;
-        }
-
-        .book-button:hover {
-            background: var(--gold-light);
-            transform: scale(1.05);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-family: 'Cormorant', serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--gold);
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: var(--cream);
-            line-height: 1.8;
-        }
-
-        /* Connected Projects */
-        .connected-projects {
-            background: linear-gradient(135deg, var(--forest-mid), var(--forest));
-            padding: 2rem;
-            border-radius: 4px;
-            margin-top: 2rem;
-        }
-
-        .connected-projects p {
-            color: var(--mist);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .connected-projects ul {
-            list-style: none;
-        }
-
-        .connected-projects li {
-            margin-bottom: 0.5rem;
-        }
-
-        .connected-projects a {
-            color: var(--gold);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .connected-projects a:hover {
-            color: var(--gold-light);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--forest);
-            padding: 2rem;
-            text-align: center;
-            border-top: 2px solid var(--gold);
-            color: var(--mist);
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: var(--gold);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: var(--gold-light);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav a {
-                margin-left: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 2rem 1rem;
-            }
-        }
-    </style>
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-links .nav-link { display: none; }
+      .hero { padding: 120px 24px 80px; }
+      .season-section { padding: 48px 24px; }
+      .season-inner { flex-direction: column; gap: 16px; }
+      .experiences-section { padding: 80px 24px; }
+      .experiences-grid { grid-template-columns: 1fr; }
+      .moment-section { padding: 80px 24px; }
+      .about-section { padding: 80px 24px; }
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .inquiry-section { padding: 80px 24px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: 1; }
+      .ecosystem-section { padding: 48px 24px; }
+      .ecosystem-links { gap: 28px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 24px; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">ISLAS HOSPITALITY</div>
-        <nav>
-            <a href="#events">EVENTS</a>
-            <a href="#about">ABOUT</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>World-Class Experiences</h1>
-        <p>Storytelling dinners, workshops, and events that connect, inspire, and nourish.</p>
-        <a href="#events" class="cta-button">Explore Events</a>
-    </section>
+  <nav id="nav">
+    <a href="#" class="nav-logo">ISLAS<span>.</span></a>
+    <div class="nav-links">
+      <a href="#experiences" class="nav-link">Experiences</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#inquiry" class="nav-link">Inquire</a>
+      <a href="#inquiry" class="nav-cta">Book an experience</a>
+    </div>
+  </nav>
 
-    <!-- Events Calendar Section -->
-    <section id="events">
-        <h2>Upcoming Events</h2>
-        <div class="events-grid">
-            <!-- June 22: Pop-up Dinner -->
-            <div class="event-card">
-                <div class="event-date">June 22, 2026</div>
-                <div class="event-title">Pop-Up Dinner: Toronto Launch</div>
-                <div class="event-location">Toronto, ON</div>
-                <div class="event-description">
-                    Join Chef Marc for an intimate 5-course storytelling dinner celebrating the flavors and stories of the islands. Each course features culinary narratives from our culinary travels.
-                </div>
-                <div class="event-details">
-                    <span class="event-price">$185</span>
-                    <a href="https://calendly.com/marcbuen" class="book-button">Book Now →</a>
-                </div>
-            </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="status-pill">
+        <span class="dot"></span>
+        <span>Carefully rebuilding · Accepting select inquiries</span>
+      </div>
+      <h1>Food is <em>storytelling.</em><br>Business is <em>systems.</em><br>We bring both.</h1>
+      <p class="hero-sub">Islas Hospitality Group creates <strong>chef-led dinners, cultural cooking experiences, and operator workshops</strong> — rooted in Filipino culinary tradition and eight years of building a food business from the ground up.</p>
+      <div class="hero-actions">
+        <a href="#inquiry" class="btn-primary">
+          Submit an inquiry
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#experiences" class="btn-text">See what we offer →</a>
+      </div>
+    </div>
+  </section>
 
-            <!-- July Workshop -->
-            <div class="event-card">
-                <div class="event-date">July 2026</div>
-                <div class="event-title">Workshop: Building Operating Systems for Growth</div>
-                <div class="event-location">Toronto, ON</div>
-                <div class="event-description">
-                    A 4-hour intensive workshop exploring the operator logic frameworks that power successful food businesses. Ideal for restaurateurs and food entrepreneurs.
-                </div>
-                <div class="event-details">
-                    <span class="event-price">$350</span>
-                    <a href="https://calendly.com/marcbuen" class="book-button">Book Now →</a>
-                </div>
-            </div>
+  <!-- SEASON NOTE -->
+  <section class="season-section">
+    <div class="season-inner">
+      <div class="season-mark">A note on where we are</div>
+      <p class="season-text">We paused restaurant operations in late 2025 following a period of significant personal and professional transition. We are <strong>rebuilding carefully</strong> — taking select events and experiences that align with where we are going, not where we have been. If you are reading this, you found us at the right moment. <strong>We would love to hear what you are building.</strong></p>
+    </div>
+  </section>
 
-            <!-- August Workshop -->
-            <div class="event-card">
-                <div class="event-date">August 2026</div>
-                <div class="event-title">Workshop: Vancouver Edition</div>
-                <div class="event-location">Vancouver, BC</div>
-                <div class="event-description">
-                    Bring the same transformative workshop to the West Coast. Learn systems thinking, financial clarity, and operational excellence from proven frameworks.
-                </div>
-                <div class="event-details">
-                    <span class="event-price">$350</span>
-                    <a href="https://calendly.com/marcbuen" class="book-button">Book Now →</a>
-                </div>
-            </div>
+  <!-- EXPERIENCES -->
+  <section class="experiences-section" id="experiences">
+    <div class="section-tag reveal">What we create</div>
+    <h2 class="reveal">Experiences that <em>nourish and teach.</em></h2>
+    <p class="reveal" style="font-size:18px;font-weight:300;color:var(--mist);max-width:720px;line-height:1.7;margin-bottom:0;">Every experience we design carries the same intention: food as a vehicle for connection, culture, and genuine learning. We do not produce events that feel generic. <strong>Each engagement is built around the specific occasion, audience, and story you want to tell.</strong></p>
+    <div class="experiences-grid">
+      <div class="exp-card reveal">
+        <div class="exp-tag">Dining</div>
+        <h3>Storytelling dinners</h3>
+        <p>Intimate multi-course dinners where each dish is a chapter. <strong>Filipino culinary tradition, family memory, and cultural identity</strong> served with precision and warmth. Chef Marc narrates between courses — connecting food to place, to people, to purpose.</p>
+        <div class="exp-suitable"><span>Suited for:</span> private hosts, cultural institutions, corporate dining, community celebrations, brand experiences.</div>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-tag">Demonstration</div>
+        <h3>Live cooking demos</h3>
+        <p>Chef Marc at festivals, expos, corporate events, and community gatherings. <strong>Filipino technique, signature flavour, and a story worth hearing.</strong> Available for a single appearance or a series of engagements across Canada and internationally.</p>
+        <div class="exp-suitable"><span>Suited for:</span> food festivals, cultural expos, brand activations, media appearances, community events.</div>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-tag">Education</div>
+        <h3>Operator workshops</h3>
+        <p>Practical intensives for food business founders and operators — from <strong>financial clarity and systems thinking to menu engineering and sustainable kitchen practice.</strong> Built on eight years of real operator experience, not textbook theory.</p>
+        <div class="exp-suitable"><span>Suited for:</span> aspiring chefs, food entrepreneurs, culinary schools, accelerators, hospitality associations.</div>
+      </div>
+    </div>
+  </section>
 
-            <!-- August Dinner -->
-            <div class="event-card">
-                <div class="event-date">August 2026</div>
-                <div class="event-title">Pop-Up Dinner: Vancouver</div>
-                <div class="event-location">Vancouver, BC</div>
-                <div class="event-description">
-                    A celebration of Filipino and Japanese culinary traditions, featuring Chef Marc's signature storytelling between courses.
-                </div>
-                <div class="event-details">
-                    <span class="event-price">$185</span>
-                    <a href="https://calendly.com/marcbuen" class="book-button">Book Now →</a>
-                </div>
-            </div>
+  <!-- HALAL EXPO MOMENT -->
+  <section class="moment-section">
+    <div class="moment-inner">
+      <div class="section-tag reveal">Returning to the stage</div>
+      <h2 class="reveal">We were at <em>Halal Expo Canada,</em><br>June 11, 2026.</h2>
+      <p class="reveal">After pausing public appearances following the closure of iSLAS in 2025, our first return to a live stage was a cooking demo at Halal Expo Canada in Toronto. It was a reminder of why we started — the food, the conversation, the aspiring chefs and bakers who came up after the demo with questions about how to start, how to survive, how to build something that lasts.</p>
+      <div class="pull-quote reveal">
+        <p>"Every person who came up after that demo and said 'I want to open something someday' — that is who we are building this for."</p>
+      </div>
+      <p class="reveal">That energy is what drives the operator workshops, the storytelling dinners, and everything we are quietly building through <a href="https://islastech.tech" style="color:var(--gold);text-decoration:none;">Islas Tech</a>. If you were there, thank you. If you weren't — we're just getting started.</p>
+    </div>
+  </section>
 
-            <!-- September Workshop -->
-            <div class="event-card">
-                <div class="event-date">September 2026</div>
-                <div class="event-title">Workshop: NYC Edition</div>
-                <div class="event-location">New York, NY</div>
-                <div class="event-description">
-                    Expanding to the East Coast. Same transformative content, new audience of ambitious food operators and entrepreneurs.
-                </div>
-                <div class="event-details">
-                    <span class="event-price">$400</span>
-                    <a href="https://calendly.com/marcbuen" class="book-button">Book Now →</a>
-                </div>
-            </div>
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-text reveal">
+        <div class="section-tag">About us</div>
+        <h2>Eight years of building.<br><em>Everything we create comes from that.</em></h2>
+        <p>Islas Hospitality Group is led by Chef Marc and Mariel Buenaventura — the two people who ran iSLAS Filipino BBQ &amp; Bar in Toronto from 2017 to 2025. Two locations. 20+ staff. Three annual Night Markets. A Filipino community built around a table.</p>
+        <p>We know what it costs to run a food business. We also know what it looks like when hospitality is done with <strong>precision, care, and genuine cultural intention.</strong> Every experience we create draws on both sides of that knowledge.</p>
+        <p>Islas Hospitality Group is the live execution layer of the broader Islas ecosystem — the place where the food, the story, and the systems thinking all come together in a room with real people.</p>
+      </div>
+      <div class="team-stack reveal">
+        <a href="https://marcbuen.com" class="team-member">
+          <div class="team-avatar">
+            <img src="marcheadshot.png" alt="Chef Marc Buenaventura" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=team-initials>MB</span>'">
+          </div>
+          <div>
+            <div class="team-name">Chef Marc Buenaventura</div>
+            <div class="team-role">Culinary Director</div>
+            <p class="team-bio">Eight years running iSLAS. Featured in BlogTO, Foodism, Toronto Life. Recognised by the Philippine Consulate 2022 &amp; 2025. Author of <em>Finding Islas</em>. Visit marcbuen.com →</p>
+          </div>
+        </a>
+        <a href="https://marielbuenaventura.com" class="team-member">
+          <div class="team-avatar">
+            <img src="mariel.png" alt="Mariel Buenaventura" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=team-initials>MB</span>'">
+          </div>
+          <div>
+            <div class="team-name">Mariel Buenaventura</div>
+            <div class="team-role">Operations &amp; Co-Founder</div>
+            <p class="team-bio">20+ years in finance and operations. The systems and logistics behind every event. Also building Islas Tech — the operating system for small hospitality operators. Visit marielbuenaventura.com →</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-            <!-- Cohort Launch -->
-            <div class="event-card">
-                <div class="event-date">September 1, 2026</div>
-                <div class="event-title">Cohort #1: Operator Logic Intensive</div>
-                <div class="event-location">Hybrid (1 in-person day + 11 weeks virtual)</div>
-                <div class="event-description">
-                    A 12-week intensive program for restaurant and food operators. Join 20 peers for structured learning, peer accountability, and transformation.
-                </div>
-                <div class="event-details">
-                    <span class="event-price">$6,000</span>
-                    <a href="https://islastech.tech" class="book-button">Learn More →</a>
-                </div>
-            </div>
+  <!-- INQUIRY FORM -->
+  <section class="inquiry-section" id="inquiry">
+    <div class="inquiry-inner">
+      <div class="inquiry-intro reveal">
+        <div class="section-tag">Book an experience</div>
+        <h2>Tell us about<br><em>your occasion.</em></h2>
+        <p>We review every inquiry personally. <strong>No automated responses, no generic packages.</strong> Tell us what you are planning and we will come back to you within 48 hours with an honest answer about whether we are the right fit.</p>
+      </div>
+      <form id="inquiry-form" class="reveal" onsubmit="handleSubmit(event)">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" placeholder="Full name" required>
+          </div>
+          <div class="form-field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-field">
+            <label for="org">Organisation or event name</label>
+            <input type="text" id="org" name="org" placeholder="Company, festival, personal event...">
+          </div>
+          <div class="form-field">
+            <label for="type">Type of experience</label>
+            <select id="type" name="type" required>
+              <option value="" disabled selected>Select one</option>
+              <option>Storytelling dinner — private</option>
+              <option>Storytelling dinner — community or corporate</option>
+              <option>Live cooking demo — festival or expo</option>
+              <option>Live cooking demo — corporate or brand</option>
+              <option>Operator workshop — private cohort</option>
+              <option>Operator workshop — institutional</option>
+              <option>Other — I'll describe below</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="date">Approximate date or timeframe</label>
+            <input type="text" id="date" name="date" placeholder="e.g. September 2026, flexible...">
+          </div>
+          <div class="form-field">
+            <label for="guests">Approximate guest count</label>
+            <input type="text" id="guests" name="guests" placeholder="e.g. 20 guests, 200 attendees...">
+          </div>
+          <div class="form-field full">
+            <label for="message">Tell us about your occasion</label>
+            <textarea id="message" name="message" placeholder="What are you planning? Who is it for? What do you want people to feel or learn?" required></textarea>
+          </div>
+          <div class="form-field full">
+            <label for="heard">How did you find us?</label>
+            <input type="text" id="heard" name="heard" placeholder="e.g. Halal Expo, Instagram, a friend...">
+          </div>
         </div>
-    </section>
+        <p class="form-note">We review all inquiries personally and respond within 48 hours.</p>
+        <button type="submit" class="form-submit">
+          Submit inquiry
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+      <div id="form-success">
+        <p><strong>Thank you — we received your inquiry.</strong> We review every submission personally and will be back in touch within 48 hours.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2>About Islas Hospitality Group</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>We Execute at the Highest Level</h3>
-                <p>
-                    Islas Hospitality Group is the execution engine of the Islas ecosystem. We create world-class events, experiences, and dinners that bring people together.
-                </p>
-                <p>
-                    Led by Chef Marc Buenaventura (Culinary Director) and Mariel Buenaventura (Operations), we blend storytelling, precision, and Filipino-Canadian hospitality.
-                </p>
-                <p>
-                    Every event is designed to educate, inspire, and nourish. Every dinner tells a story. Every workshop builds a skill.
-                </p>
-                <div class="connected-projects">
-                    <p><strong>Part of the Islas ecosystem:</strong></p>
-                    <ul>
-                        <li><a href="https://marcbuen.com">Chef Marc</a> — Culinary Director & Author</li>
-                        <li><a href="https://islastech.tech">Islas Tech</a> — Operating System for Operators</li>
-                    </ul>
-                </div>
-            </div>
-            <div style="background: linear-gradient(135deg, var(--forest-mid), var(--forest)); padding: 2rem; border-radius: 4px;">
-                <p style="color: var(--gold); font-family: 'Cormorant', serif; font-size: 1.5rem; margin-bottom: 1rem;">
-                    "Food is storytelling. Business is systems. Together, they create experiences that matter."
-                </p>
-                <p style="color: var(--mist); font-style: italic;">
-                    — Chef Marc & Mariel Buenaventura
-                </p>
-            </div>
-        </div>
-    </section>
+  <!-- ECOSYSTEM -->
+  <section class="ecosystem-section">
+    <div class="ecosystem-inner">
+      <div class="ecosystem-label">Part of the Islas ecosystem</div>
+      <div class="ecosystem-links">
+        <a href="https://islastech.tech" class="ecosystem-link">Islas Tech</a>
+        <a href="https://marcbuen.com" class="ecosystem-link">Chef Marc</a>
+        <a href="https://marielbuenaventura.com" class="ecosystem-link">Mariel</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Get in Touch</h2>
-        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-                Questions about events? Ready to book? Let's create something amazing together.
-            </p>
-            <p style="margin-bottom: 1rem;">
-                <strong style="color: var(--gold);">Email:</strong> <a href="mailto:info@islasto.com" style="color: var(--gold); text-decoration: none;">info@islasto.com</a>
-            </p>
-        </div>
-    </section>
+  <footer>
+    <div class="footer-logo">ISLAS<span>.</span></div>
+    <div class="footer-meta">
+      <a href="#experiences">Experiences</a>
+      <a href="#about">About</a>
+      <a href="#inquiry">Inquire</a>
+      <a href="mailto:info@islasto.com">info@islasto.com</a>
+    </div>
+    <p>© 2026 Islas Hospitality Group · Toronto, Canada</p>
+  </footer>
 
-    <!-- Footer -->
-    <footer>
-        <p style="margin-bottom: 1rem;">© 2026 Islas Hospitality Group — Part of the Islas ecosystem</p>
-        <p>
-            <a href="https://islastech.tech">Islas Tech</a> | 
-            <a href="https://marcbuen.com">Chef Marc</a> | 
-            <a href="mailto:info@islasto.com">Contact</a>
-        </p>
-        <p style="margin-top: 1rem; font-size: 0.85rem;">
-            Islas Tech (1001561700) | Toronto, Canada
-        </p>
-    </footer>
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('inquiry-form');
+      const success = document.getElementById('form-success');
+      const data = new FormData(form);
+      const mailto = `mailto:info@islasto.com?subject=Islas Hospitality Inquiry — ${data.get('type')}&body=Name: ${data.get('name')}%0AEmail: ${data.get('email')}%0AOrganisation: ${data.get('org')}%0AType: ${data.get('type')}%0ADate: ${data.get('date')}%0AGuests: ${data.get('guests')}%0AHow found: ${data.get('heard')}%0A%0AMessage:%0A${data.get('message')}`;
+      window.location.href = mailto;
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }
+  </script>
 </body>
 </html>
